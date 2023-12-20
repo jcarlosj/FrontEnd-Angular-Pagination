@@ -1,1 +1,8 @@
-<p>article-list works!</p>
+<!-- article-list.component.html -->
+<div *ngFor="let article of articles">
+  <h2 (click)="viewDetails(article._id)">{{ article.title }}</h2>
+  <!-- Mostrar otros detalles del artículo -->
+</div>
+
+<button (click)="prevPage()" [disabled]="currentPage === 1">Anterior</button>
+<button (click)="nextPage()">Siguiente</button>
