@@ -11,6 +11,8 @@ export class ArticleDetailsComponent {
   BASE_URL = 'http://localhost:3000/api';
 
   article: any;
+  previousArticle: any;
+  nextArticle: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,20 +20,28 @@ export class ArticleDetailsComponent {
   ) {}
 
   ngOnInit(): void {
-    const articleId: string | null = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe(params => {
+      const articleId = params['id'];
 
-    this.loadArticle( articleId! );
+      this.loadArticle(articleId);
+    });
   }
 
   loadArticle( articleId: string ): void {
     this.http.get<any>(`${ this.BASE_URL }/article/${ articleId }`).subscribe(
       (data) => {
         console.log( data );
-        this.article = data;
+        this.article = data.article;
+        this.previousArticle = data.previousArticle;
+        this.nextArticle = data.nextArticle;
       },
       (error) => {
         console.error('Error loading article details', error);
       }
     );
+  }
+
+  logRouterLink(route: string): void {
+    console.log('Ruta del enlace:', route);
   }
 }

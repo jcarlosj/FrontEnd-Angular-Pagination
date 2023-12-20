@@ -1,6 +1,19 @@
-<!-- article-details.component.html -->
 <div *ngIf="article">
   <h1>{{ article.title }}</h1>
   <p>{{ article.content }}</p>
-  <!-- Mostrar otros detalles del artículo -->
+  <!-- Otros detalles del artículo -->
+
+  <!-- Enlaces a artículos anterior y siguiente -->
+  <div *ngIf="previousArticle">
+    <a
+      routerLink="/article/{{ previousArticle._id }}"
+      (click)="logRouterLink('/article/{{ previousArticle._id }}')"
+    >Artículo Anterior</a>
+  </div>
+  <div *ngIf="nextArticle">
+    <a
+      routerLink="/article/{{ nextArticle._id }}"
+      (click)="logRouterLink('/article/{{ nextArticle._id }}')"
+    >Artículo Siguiente</a>
+  </div>
 </div>
